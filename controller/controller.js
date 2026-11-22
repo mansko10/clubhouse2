@@ -35,7 +35,12 @@ async function signUpPost(req, res) {
 }
 
 async function loginGet(req, res) {
-  return res.render("login");
+  const errors = req.session.messages;
+
+  // Make login error messages NOT persist upon reload
+  req.session.messages = [];
+
+  return res.render("login", { errors });
 }
 
 async function loginPost(req, res) {

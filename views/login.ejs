@@ -8,8 +8,8 @@
   <body>
     <% if (locals.errors) { %>
            <ul class="errors-ul">
-            <% locals.errors.forEach((err) => { %>
-                <li><%= err.msg %></li>
+            <% locals.errors.forEach((msg) => { %>
+                <li><%= msg %></li>
               <% }) %>
            </ul>
     <% } %>

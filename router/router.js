@@ -13,12 +13,9 @@ router.post(
   "/log-in",
   passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/",
+    failureRedirect: "/log-in",
     failureMessage: true,
   }),
-  (req, res) => {
-    res.redirect("/");
-  },
 );
 router.get("/logout", controller.logOutGet);
 
