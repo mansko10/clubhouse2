@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up</title>
+  </head>
+  <body>
+    <% if (locals.errors) { %>
+           <ul class="errors-ul">
+            <% locals.errors.forEach((err) => { %>
+                <li><%= err.msg %></li>
+              <% }) %>
+           </ul>
+    <% } %>
+    <form action="/sign-up" method="post">
+      <div class="input-item">
+        <label for="firstName">First Name:</label>
+        <% if (locals.first_name) { %>
+          <input type="text" id="firstName" name="first_name" value="<%= locals.first_name %>" />
+        <% } else { %>
+          <input type="text" id="firstName" name="first_name" />
+        <% } %>
+      </div>
+      <div class="input-item">
+        <label for="lastName">Last Name:</label>
+        <% if (locals.last_name) { %>
+          <input type="text" id="lastName" name="last_name" value="<%= locals.last_name %>" />
+        <% } else { %>
+          <input type="text" id="lastName" name="last_name" />
+        <% } %>
+      </div>
+      <div class="input-item">
+        <label for="username">Username:</label>
+        <% if (locals.last_name) { %>
+          <input type="text" id="username" name="username" value="<%= locals.username %>" />
+        <% } else { %>
+          <input type="text" id="username" name="username" />
+        <% } %>
+      </div>
+      <div class="input-item">
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password" />
+      </div>
+      <div class="input-item">
+        <label for="confirmPassword">Confirm password: </label>
+        <input type="password" name="confirm_password" id="confirmPassword" />
+      </div>
+      <div class="input-item">
+        <button type="submit">Sign up</button>
+      </div>
+    </form>
+  </body>
+</html>
