@@ -22,17 +22,40 @@ async function signUpPost(req, res) {
     });
   }
 
-  console.log(req.body);
-  const hasedPassword = await bcrypt.hash(req.body.password, 10);
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
   await db.createUser(
     req.body.first_name,
     req.body.last_name,
     req.body.username,
-    hasedPassword,
+    hashedPassword,
   );
 
   return res.redirect("/");
 }
 
-module.exports = { getIndex, signUpGet, signUpPost };
+async function loginGet(req, res) {
+  return res.render("login");
+}
+
+async function loginPost(req, res) {
+  return res.redirect("/");
+}
+
+async function logOutGet(req, res) {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+}
+
+module.exports = {
+  getIndex,
+  signUpGet,
+  signUpPost,
+  loginGet,
+  loginPost,
+  logOutGet,
+};

@@ -6,6 +6,12 @@
     <title>Home</title>
   </head>
   <body>
-    <a href="/sign-up">Sign up</a>
+    <% if (locals.currentUser) { %>
+      <h1>Welcome <%= locals.currentUser.username  %></h1>
+      <a href="/logout">Logout</a>
+    <% } else { %>
+      <a href="/log-in">Log in</a>
+      <a href="/sign-up">Sign up</a>
+    <% } %>
   </body>
 </html>

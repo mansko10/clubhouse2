@@ -3,6 +3,10 @@ require("dotenv").config();
 const express = require("express");
 const path = require("node:path");
 const router = require("./router/router");
+const session = require("express-session");
+const pgSession = require("connect-pg-simple")(session);
+const pool = require("./db/pool");
+const { passport } = require("./passport");
 
 // Create Express App
 const app = express();
@@ -17,6 +21,25 @@ app.use(express.static(assetsPath));
 
 // middleware to parse form data into req.body
 app.use(express.urlencoded({ extended: true }));
+
+//set up session and passport session
+app.use(
+  session({
+    store: new pgSession({
+      pool: pool,
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  }),
+);
+app.use(passport.session());
+
+// Make views have access to req.user
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 // Router
 app.use("/", router);
