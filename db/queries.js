@@ -25,4 +25,30 @@ async function getUserById(id) {
   return rows[0];
 }
 
-module.exports = { createUser, getUserByUsername, getUserById };
+async function createMessage(user_id, message_title, message_text) {
+  await pool.query(
+    `
+      INSERT INTO messages
+      (user_id, timestamp, message_title, message_text)
+      VALUES
+      ($1, NOW(), $2, $3);
+    `,
+    [user_id, message_title, message_text],
+  );
+}
+
+async function getAllMessages() {
+  const { rows } = await pool.query(
+    `SELECT username, timestamp, message_title, message_text FROM messages LEFT JOIN users ON messages.user_id = users.id;`,
+  );
+
+  return rows;
+}
+
+module.exports = {
+  createUser,
+  getUserByUsername,
+  getUserById,
+  createMessage,
+  getAllMessages,
+};

@@ -28,4 +28,15 @@ const validateSignUp = [
   }),
 ];
 
-module.exports = { validateSignUp };
+const validateMessage = [
+  body("message_title")
+    .trim()
+    .isLength({ min: 1, max: 50 })
+    .withMessage("Message title length must be between 1 and 50 characters."),
+  body("message_text")
+    .trim()
+    .isLength({ min: 1, max: 150 })
+    .withMessage("Message text length must be between 1 and 150 characters."),
+];
+
+module.exports = { validateSignUp, validateMessage };

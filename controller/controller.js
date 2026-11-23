@@ -3,7 +3,8 @@ const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
 
 async function getIndex(req, res) {
-  return res.render("index");
+  const messages = await db.getAllMessages();
+  return res.render("index", { messages });
 }
 
 async function signUpGet(req, res) {
@@ -52,12 +53,30 @@ async function logOutGet(req, res) {
     if (err) {
       return next(err);
     }
-    res.redirect("/");
+    return res.redirect("/");
   });
 }
 
 async function createNewMessageGet(req, res) {
-  res.render("createNewMessage");
+  return res.render("createNewMessage");
+}
+
+async function createNewMessagePost(req, res) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).render("createNewMessage", {
+      errors: errors.array(),
+    });
+  }
+
+  await db.createMessage(
+    req.user.id,
+    req.body.message_title,
+    req.body.message_text,
+  );
+
+  return res.redirect("/");
 }
 
 module.exports = {
@@ -68,4 +87,5 @@ module.exports = {
   loginPost,
   logOutGet,
   createNewMessageGet,
+  createNewMessagePost,
 };

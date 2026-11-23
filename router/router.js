@@ -25,4 +25,11 @@ router.get(
   controller.createNewMessageGet,
 );
 
+router.post(
+  "/create-new-message",
+  isAuthenticated,
+  validators.validateMessage,
+  controller.createNewMessagePost,
+);
+
 module.exports = router;
