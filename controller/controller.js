@@ -56,6 +56,10 @@ async function logOutGet(req, res) {
   });
 }
 
+async function createNewMessageGet(req, res) {
+  res.render("createNewMessage");
+}
+
 module.exports = {
   getIndex,
   signUpGet,
@@ -63,4 +67,5 @@ module.exports = {
   loginGet,
   loginPost,
   logOutGet,
+  createNewMessageGet,
 };

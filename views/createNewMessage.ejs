@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create New Message</title>
+  </head>
+  <body>
+    <a href="/">Home</a>
+    <h1>Create new message</h1>
+    <form action="/create-new-message" method="post">
+      <div class="input-item">
+        <label for="messageTitle">Message title: </label>
+        <input type="text" name="message_title" id="messageTitle" />
+      </div>
+      <div class="input-item">
+        <label for="messageText">Message text: </label>
+        <textarea name="message_text" id="messageText"></textarea>
+      </div>
+      <div class="input-item">
+        <button type="submit">Create new message</button>
+      </div>
+    </form>
+  </body>
+</html>

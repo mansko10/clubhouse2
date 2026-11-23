@@ -2,6 +2,7 @@ const { Router } = require("express");
 const controller = require("../controller/controller");
 const validators = require("../validators");
 const { passport } = require("../passport");
+const { isAuthenticated } = require("../miscellaneousMiddlewares");
 
 const router = Router();
 
@@ -18,5 +19,10 @@ router.post(
   }),
 );
 router.get("/logout", controller.logOutGet);
+router.get(
+  "/create-new-message",
+  isAuthenticated,
+  controller.createNewMessageGet,
+);
 
 module.exports = router;
