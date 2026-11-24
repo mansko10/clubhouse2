@@ -85,7 +85,7 @@ async function getBecomeMember(req, res) {
 }
 
 async function postBecomeMember(req, res) {
-  if (req.body.admin_code === process.env.MEMBER_SECRET_CODE) {
+  if (req.body.member_code === process.env.MEMBER_SECRET_CODE) {
     await db.makeMember(req.user.id);
   } else {
     return res.render("becomeMember", {
