@@ -37,6 +37,10 @@ async function signUpPost(req, res) {
 }
 
 async function loginGet(req, res) {
+  // Prevent logged in user from visiting login form
+  if (req.user) {
+    return res.redirect("/");
+  }
   const errors = req.session.messages;
 
   // Make login error messages NOT persist upon reload
@@ -81,10 +85,16 @@ async function createNewMessagePost(req, res) {
 }
 
 async function getBecomeMember(req, res) {
+  if (req.user.is_member) {
+    return res.redirect("/");
+  }
   return res.render("becomeMember");
 }
 
 async function postBecomeMember(req, res) {
+  if (req.user.is_member) {
+    return res.redirect("/");
+  }
   if (req.body.member_code === process.env.MEMBER_SECRET_CODE) {
     await db.makeMember(req.user.id);
   } else {
@@ -96,10 +106,18 @@ async function postBecomeMember(req, res) {
 }
 
 async function getBecomeAdmin(req, res) {
+  if (req.user.is_admin) {
+    return res.redirect("/");
+  }
+
   return res.render("becomeAdmin");
 }
 
 async function postBecomeAdmin(req, res) {
+  if (req.user.is_admin) {
+    return res.redirect("/");
+  }
+
   if (req.body.admin_code === process.env.ADMIN_SECRET_CODE) {
     await db.makeAdmin(req.user.id);
   } else {
