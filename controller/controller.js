@@ -95,6 +95,27 @@ async function postBecomeMember(req, res) {
   return res.redirect("/");
 }
 
+async function getBecomeAdmin(req, res) {
+  return res.render("becomeAdmin");
+}
+
+async function postBecomeAdmin(req, res) {
+  if (req.body.admin_code === process.env.ADMIN_SECRET_CODE) {
+    await db.makeAdmin(req.user.id);
+  } else {
+    return res.render("becomeAdmin", {
+      errorMessage: "Sorry. Code not correct.",
+    });
+  }
+  return res.redirect("/");
+}
+
+async function postMessageDelete(req, res) {
+  await db.deleteMessage(req.params.messageId);
+
+  res.redirect("/");
+}
+
 module.exports = {
   getIndex,
   signUpGet,
@@ -106,4 +127,7 @@ module.exports = {
   createNewMessagePost,
   getBecomeMember,
   postBecomeMember,
+  getBecomeAdmin,
+  postBecomeAdmin,
+  postMessageDelete,
 };

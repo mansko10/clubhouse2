@@ -39,19 +39,32 @@ async function createMessage(user_id, message_title, message_text) {
 
 async function getAllMessages() {
   const { rows } = await pool.query(
-    `SELECT username, timestamp, message_title, message_text FROM messages LEFT JOIN users ON messages.user_id = users.id;`,
+    `SELECT username, timestamp, message_title, message_text, messages.id AS message_id FROM messages LEFT JOIN users ON messages.user_id = users.id;`,
   );
 
   return rows;
 }
 
-async function makeMember(id) {
+async function makeMember(userId) {
   await pool.query(
     `UPDATE users
      SET is_member = true
      WHERE id = $1;`,
-    [id],
+    [userId],
   );
+}
+
+async function makeAdmin(userId) {
+  await pool.query(
+    `UPDATE users
+     SET is_admin = true
+     WHERE id = $1;`,
+    [userId],
+  );
+}
+
+async function deleteMessage(messageId) {
+  await pool.query(`DELETE FROM messages WHERE id = $1`, [messageId]);
 }
 
 module.exports = {
@@ -61,4 +74,6 @@ module.exports = {
   createMessage,
   getAllMessages,
   makeMember,
+  makeAdmin,
+  deleteMessage,
 };

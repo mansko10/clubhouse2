@@ -15,6 +15,9 @@
       <% if (!locals.currentUser.is_member) { %>
           <a href="/become-member">Become member</a>
       <% } %>
+      <% if (!locals.currentUser.is_admin) { %>
+          <a href="/become-admin">Become admin</a>
+      <% } %>
       <h1>All messages</h1>
       <ul style="text-decoration: none; padding: 0; list-style-type: none;">
         <% locals.messages.forEach(message => { %>
@@ -31,6 +34,11 @@
                 <p style="margin: 0;"><strong>Posted at:</strong> <%= message.timestamp %></p>
               <% } else { %>
                 <p style="margin: 0;"><strong>Posted at:</strong> hidden</p>
+              <% } %>
+              <% if (locals.currentUser.is_admin) { %>
+                <form action="/<%= message.message_id %>/delete" method="post">
+                  <button type="submit">Delete</button>
+                </form>
               <% } %>
             </li>
         <% }) %>
