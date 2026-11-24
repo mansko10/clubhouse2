@@ -45,7 +45,7 @@ async function getAllMessages() {
   return rows;
 }
 
-async function makeAdmin(id) {
+async function makeMember(id) {
   await pool.query(
     `UPDATE users
      SET is_member = true
@@ -60,5 +60,5 @@ module.exports = {
   getUserById,
   createMessage,
   getAllMessages,
-  makeAdmin,
+  makeMember,
 };
