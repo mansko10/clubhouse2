@@ -3,10 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/global.css">
     <title>Create New Message</title>
   </head>
   <body>
-    <a href="/">Home</a>
+    <header>
+      <a href="/">Clubhouse</a>
+    </header>
     <% if (locals.errors) { %>
            <ul class="errors-ul">
             <% locals.errors.forEach((err) => { %>
@@ -20,7 +23,7 @@
         <label for="messageTitle">Message title: </label>
         <input type="text" name="message_title" id="messageTitle" />
       </div>
-      <div class="input-item">
+      <div class="input-item textarea-input-item">
         <label for="messageText">Message text: </label>
         <textarea name="message_text" id="messageText"></textarea>
       </div>

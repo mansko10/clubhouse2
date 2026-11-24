@@ -3,16 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/global.css">
     <title>Become admin</title>
   </head>
   <body>
+    <header>
+      <a href="/">Clubhouse</a>
+    </header>
     <% if (locals.errorMessage) { %>
         <ul>
           <li><%= locals.errorMessage %></li>
         </ul>
     <% } %>
     <form action="/become-admin" method="post">
-      <div class="input-item">
+      <div class="input-item admin-input-item">
         <label for="code">Enter secret code to become admin</label>
         <input type="password" name="admin_code" id="code" />
       </div>

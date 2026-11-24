@@ -1,0 +1,145 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  background-color: crimson;
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  cursor: default;
+  padding: 10px 0;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.anchor-links {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  justify-content: center;
+}
+
+.anchor-links a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  background-color: crimson;
+  color: white;
+  padding: 5px 10px;
+}
+
+.anchor-links a:hover {
+  background-color: darkred;
+}
+
+h1 {
+  text-align: center;
+  color: crimson;
+  cursor: default;
+}
+
+.messages-list {
+  text-decoration: none;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+.messages-list li {
+  border: 1px solid black;
+  padding: 5px;
+  align-self: center;
+  width: min(600px, 100%);
+}
+
+.messages-list li form {
+  display: block;
+  padding: 5px 0;
+}
+
+.messages-list li form button {
+  font-size: 1rem;
+}
+
+li p {
+  margin: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form .input-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.textarea-input-item {
+  align-items: normal;
+}
+
+.member-input-item,
+.admin-input-item {
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+form label {
+  width: 200px;
+  text-align: right;
+  font-size: 1.3rem;
+  color: crimson;
+  font-weight: bold;
+}
+
+.member-input-item label,
+.admin-input-item label {
+  text-align: left;
+  width: 400px;
+}
+
+form input {
+  height: 20px;
+  font-size: 1.1rem;
+  padding: 5px;
+}
+
+form textarea {
+  height: 50px;
+  width: 232px;
+}
+
+form button {
+  background-color: crimson;
+  border: none;
+  font-size: 1.3rem;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: darkred;
+}
+
+.errors-ul {
+  width: min(600px, 100%);
+  margin: auto;
+  padding: 10px 0;
+}

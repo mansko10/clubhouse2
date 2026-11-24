@@ -3,9 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/global.css">
     <title>Login</title>
   </head>
   <body>
+    <header>
+      <a href="/">Clubhouse</a>
+    </header>
     <% if (locals.errors) { %>
            <ul class="errors-ul">
             <% locals.errors.forEach((msg) => { %>
@@ -13,6 +17,7 @@
               <% }) %>
            </ul>
     <% } %>
+    <h1>Log In</h1>
     <form action="/log-in" method="post">
         <div class="input-item">
             <label for="username">Username: </label>
