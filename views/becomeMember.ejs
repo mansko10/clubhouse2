@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Become Member</title>
+  </head>
+  <body>
+    <% if (locals.errorMessage) { %>
+        <ul>
+          <li><%= locals.errorMessage %></li>
+        </ul>
+    <% } %>
+    <form action="/become-Member" method="post">
+      <div class="input-item">
+        <label for="code">Enter secret code to become member</label>
+        <input type="password" name="admin_code" id="code" />
+      </div>
+      <div class="input-item">
+        <button type="submit">Become member</button>
+      </div>
+    </form>
+  </body>
+</html>

@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const db = require("../db/queries");
 const bcrypt = require("bcryptjs");
+require("dotenv").config();
 
 async function getIndex(req, res) {
   const messages = await db.getAllMessages();
@@ -79,6 +80,21 @@ async function createNewMessagePost(req, res) {
   return res.redirect("/");
 }
 
+async function getBecomeMember(req, res) {
+  return res.render("becomeMember");
+}
+
+async function postBecomeMember(req, res) {
+  if (req.body.admin_code === process.env.MEMBER_SECRET_CODE) {
+    await db.makeAdmin(req.user.id);
+  } else {
+    return res.render("becomeMember", {
+      errorMessage: "Sorry. Code not correct.",
+    });
+  }
+  return res.redirect("/");
+}
+
 module.exports = {
   getIndex,
   signUpGet,
@@ -88,4 +104,6 @@ module.exports = {
   logOutGet,
   createNewMessageGet,
   createNewMessagePost,
+  getBecomeMember,
+  postBecomeMember,
 };

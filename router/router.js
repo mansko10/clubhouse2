@@ -32,4 +32,8 @@ router.post(
   controller.createNewMessagePost,
 );
 
+router.get("/become-member", isAuthenticated, controller.getBecomeMember);
+
+router.post("/become-member", isAuthenticated, controller.postBecomeMember);
+
 module.exports = router;

@@ -7,18 +7,31 @@
   </head>
   <body>
     <% if (locals.currentUser) { %>
-      <h1>Welcome <%= locals.currentUser.username  %></h1>
+      <h1>Welcome, <%= locals.currentUser.username  %></h1>
       <a href="/logout">Logout</a>
       <br>
       <a href="/create-new-message">Create new message</a>
+      <br>
+      <% if (!locals.currentUser.is_member) { %>
+          <a href="/become-member">Become member</a>
+      <% } %>
       <h1>All messages</h1>
       <ul style="text-decoration: none; padding: 0; list-style-type: none;">
         <% locals.messages.forEach(message => { %>
             <li style="border: 1px solid black; padding: 5px; margin: 10px 0;">
               <p style="margin: 0;"><strong>Title:</strong> <%= message.message_title %></p>
               <p style="margin: 0;"><strong>Text:</strong> <%= message.message_text %></p>
-              <p style="margin: 0;"><strong>Author:</strong> hidden</p>
-              <p style="margin: 0;"><strong>Posted at:</strong> hidden</p>
+              
+              <% if (locals.currentUser.is_member) { %>
+                <p style="margin: 0;"><strong>Author:</strong> <%= message.username %></p>
+              <% } else { %>
+                <p style="margin: 0;"><strong>Author:</strong> hidden</p>
+              <% } %>
+              <% if (locals.currentUser.is_member) { %>
+                <p style="margin: 0;"><strong>Posted at:</strong> <%= message.timestamp %></p>
+              <% } else { %>
+                <p style="margin: 0;"><strong>Posted at:</strong> hidden</p>
+              <% } %>
             </li>
         <% }) %>
       </ul>

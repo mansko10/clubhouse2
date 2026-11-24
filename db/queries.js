@@ -45,10 +45,20 @@ async function getAllMessages() {
   return rows;
 }
 
+async function makeAdmin(id) {
+  await pool.query(
+    `UPDATE users
+     SET is_member = true
+     WHERE id = $1;`,
+    [id],
+  );
+}
+
 module.exports = {
   createUser,
   getUserByUsername,
   getUserById,
   createMessage,
   getAllMessages,
+  makeAdmin,
 };
